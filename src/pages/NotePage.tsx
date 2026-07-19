@@ -58,13 +58,13 @@ const NotePage: React.FC = () => {
                         >
                             <Typography
                                 variant="h4"
-                                fontWeight={700}
                                 sx={{
                                     mb: 1.5,
+                                    fontWeight: 700,
                                     fontSize: { xs: '1.5rem', sm: '1.85rem' },
                                     overflowWrap: 'anywhere',
                                     wordBreak: 'break-word',
-                                    letterSpacing: '-0.02em',
+                                    letterSpacing: 0,
                                     lineHeight: 1.25,
                                 }}
                             >
@@ -74,8 +74,7 @@ const NotePage: React.FC = () => {
                             <Stack
                                 direction="row"
                                 spacing={2}
-                                alignItems="center"
-                                sx={{ mb: 2, flexWrap: 'wrap', opacity: 0.8, minWidth: 0 }}
+                                sx={{ mb: 2, flexWrap: 'wrap', opacity: 0.8, minWidth: 0, alignItems: 'center' }}
                                 useFlexGap
                             >
                                 {metadata.date && (
@@ -88,7 +87,7 @@ const NotePage: React.FC = () => {
                                     </Typography>
                                 )}
                                 {readingTime > 0 && (
-                                    <Stack direction="row" alignItems="center" spacing={0.5}>
+                                    <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
                                         <AccessTimeIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
                                         <Typography variant="body2" color="text.secondary">
                                             {readingTime} min read

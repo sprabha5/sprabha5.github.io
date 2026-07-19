@@ -73,14 +73,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, onClick }) => {
                             overflowWrap: 'anywhere',
                             wordBreak: 'break-word',
                             lineHeight: 1.3,
-                            letterSpacing: '-0.01em',
+                            letterSpacing: 0,
                         }}
                     >
                         {post.title}
                     </Typography>
 
-                    <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1.5, opacity: 0.7 }}>
-                        <Typography variant="caption" color="text.secondary" fontWeight={500}>
+                    <Stack direction="row" spacing={1.5} sx={{ mb: 1.5, opacity: 0.7, alignItems: 'center' }}>
+                        <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 500 }}>
                             {new Date(post.date).toLocaleDateString(undefined, {
                                 year: 'numeric',
                                 month: 'short',
@@ -88,7 +88,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, onClick }) => {
                             })}
                         </Typography>
                         {post.readingTime && (
-                            <Stack direction="row" alignItems="center" spacing={0.3}>
+                            <Stack direction="row" spacing={0.3} sx={{ alignItems: 'center' }}>
                                 <AccessTimeIcon sx={{ fontSize: 13, color: 'text.secondary' }} />
                                 <Typography variant="caption" color="text.secondary">
                                     {post.readingTime} min
@@ -98,7 +98,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, onClick }) => {
                     </Stack>
 
                     <Box sx={{ mt: 'auto' }}>
-                        <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap>
+                        <Stack direction="row" spacing={0.75} useFlexGap sx={{ flexWrap: 'wrap' }}>
                             {post.tags.map((tag) => (
                                 <Chip
                                     key={tag}

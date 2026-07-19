@@ -6,8 +6,6 @@ import NotesList from './pages/NotesList';
 import NotePage from './pages/NotePage';
 import BlogList from './pages/BlogList';
 import BlogPage from './pages/BlogPage';
-import YouTubeList from './pages/YouTubeList';
-import YouTubePage from './pages/YouTubePage';
 
 function App() {
   return (
@@ -19,8 +17,6 @@ function App() {
           <Route path="/notes/:slug" element={<NotePage />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPage />} />
-          <Route path="/youtube" element={<YouTubeList />} />
-          <Route path="/youtube/:id" element={<YouTubePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Navigation>

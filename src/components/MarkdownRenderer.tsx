@@ -69,8 +69,7 @@ const createComponents = (isDark: boolean): Components => ({
         <Typography
             variant="h4"
             component="h1"
-            fontWeight={800}
-            sx={{ mt: 3, mb: 1.5, letterSpacing: '-0.02em' }}
+            sx={{ mt: 3, mb: 1.5, fontWeight: 800, letterSpacing: 0 }}
             {...props}
         >
             {children}
@@ -80,8 +79,7 @@ const createComponents = (isDark: boolean): Components => ({
         <Typography
             variant="h5"
             component="h2"
-            fontWeight={700}
-            sx={{ letterSpacing: '-0.01em' }}
+            sx={{ fontWeight: 700, letterSpacing: 0 }}
             {...props}
         >
             {children}
@@ -91,7 +89,7 @@ const createComponents = (isDark: boolean): Components => ({
         <Typography
             variant="h6"
             component="h3"
-            fontWeight={600}
+            sx={{ fontWeight: 600 }}
             {...props}
         >
             {children}
@@ -101,7 +99,7 @@ const createComponents = (isDark: boolean): Components => ({
         <Typography
             variant="subtitle1"
             component="h4"
-            fontWeight={600}
+            sx={{ fontWeight: 600 }}
             {...props}
         >
             {children}

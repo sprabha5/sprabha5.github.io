@@ -32,14 +32,14 @@ const NoteCard: React.FC<NoteCardProps> = ({ note, onClick }) => {
                             <PushPinIcon color="primary" fontSize="small" sx={{ ml: 1, flexShrink: 0 }} />
                         )}
                     </Box>
-                    <Typography variant="body2" color="text.secondary" display="block" sx={{ mb: 2, fontSize: '0.9rem' }}>
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2, fontSize: '0.9rem', display: 'block' }}>
                         {new Date(note.date).toLocaleDateString(undefined, {
                             year: 'numeric',
                             month: 'short',
                             day: 'numeric',
                         })}
                     </Typography>
-                    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mt: 'auto' }}>
+                    <Stack direction="row" spacing={1} useFlexGap sx={{ mt: 'auto', flexWrap: 'wrap' }}>
                         {note.tags.map((tag) => (
                             <Chip
                                 key={tag}

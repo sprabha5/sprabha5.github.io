@@ -66,9 +66,9 @@ const BlogList: React.FC = () => {
                             >
                                 <Typography
                                     variant="h6"
-                                    fontWeight={600}
                                     sx={{
                                         mb: 0.5,
+                                        fontWeight: 600,
                                         lineHeight: 1.35,
                                         fontSize: { xs: '1.15rem', sm: '1.2rem' },
                                         overflowWrap: 'anywhere',
@@ -78,7 +78,7 @@ const BlogList: React.FC = () => {
                                     {post.title}
                                 </Typography>
 
-                                <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 0.75, opacity: 0.6 }}>
+                                <Stack direction="row" spacing={1.5} sx={{ mb: 0.75, opacity: 0.6, alignItems: 'center' }}>
                                     <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.9rem' }}>
                                         {new Date(post.date).toLocaleDateString(undefined, {
                                             year: 'numeric',
@@ -86,7 +86,7 @@ const BlogList: React.FC = () => {
                                             day: 'numeric',
                                         })}
                                     </Typography>
-                                    <Stack direction="row" alignItems="center" spacing={0.3}>
+                                    <Stack direction="row" spacing={0.3} sx={{ alignItems: 'center' }}>
                                         <AccessTimeIcon sx={{ fontSize: 15, color: 'text.secondary' }} />
                                         <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.9rem' }}>
                                             {post.readingTime} min
@@ -95,7 +95,7 @@ const BlogList: React.FC = () => {
                                 </Stack>
 
                                 {post.tags.length > 0 && (
-                                    <Stack direction="row" spacing={0.5} flexWrap="wrap" useFlexGap>
+                                    <Stack direction="row" spacing={0.5} useFlexGap sx={{ flexWrap: 'wrap' }}>
                                         {post.tags.map((tag) => (
                                             <Chip
                                                 key={tag}

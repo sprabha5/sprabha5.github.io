@@ -3,14 +3,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const SITE_ORIGIN = 'https://shashiprabha.com';
-const CHANNEL_ID_REGEX = /^UC[\w-]{22}$/;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 
 const notesIndexPath = path.join(projectRoot, 'public', 'content', 'notes', 'index.json');
 const blogIndexPath = path.join(projectRoot, 'public', 'content', 'blog', 'index.json');
-const youtubeConfigPath = path.join(projectRoot, 'public', 'content', 'youtube', 'index.json');
 const sitemapPath = path.join(projectRoot, 'sitemap.xml');
 
 function slugFromMarkdownFilename(filename) {
@@ -34,53 +32,16 @@ async function loadIndex(indexPath) {
   }
 }
 
-async function loadYouTubeChannelId() {
-  try {
-    const raw = await readFile(youtubeConfigPath, 'utf-8');
-    const parsed = JSON.parse(raw);
-    const channelId = String(parsed?.channelId || '').trim();
-    return CHANNEL_ID_REGEX.test(channelId) ? channelId : '';
-  } catch {
-    return '';
-  }
-}
-
-async function loadYouTubeVideoIds(channelId) {
-  if (!channelId) {
-    return [];
-  }
-
-  const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${encodeURIComponent(channelId)}`;
-
-  try {
-    const response = await fetch(feedUrl, { signal: AbortSignal.timeout(8000) });
-    if (!response.ok) {
-      return [];
-    }
-
-    const feedXml = await response.text();
-    return Array.from(feedXml.matchAll(/<yt:videoId>([^<]+)<\/yt:videoId>/g))
-      .map((match) => match[1].trim())
-      .filter((id) => id.length > 0);
-  } catch {
-    return [];
-  }
-}
-
 async function main() {
   const noteFiles = await loadIndex(notesIndexPath);
   const blogFiles = await loadIndex(blogIndexPath);
-  const channelId = await loadYouTubeChannelId();
-  const youtubeVideoIds = await loadYouTubeVideoIds(channelId);
 
   const routes = [
     '/',
     '/notes',
     '/blog',
-    '/youtube',
     ...noteFiles.map((filename) => `/notes/${slugFromMarkdownFilename(filename)}`),
     ...blogFiles.map((filename) => `/blog/${slugFromMarkdownFilename(filename)}`),
-    ...youtubeVideoIds.map((id) => `/youtube/${id}`),
   ];
 
   const uniqueRoutes = Array.from(new Set(routes));
