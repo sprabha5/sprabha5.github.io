@@ -60,7 +60,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onClick }) => {
                     >
                         {video.description}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" display="block" sx={{ mt: 'auto', fontSize: '0.9rem' }}>
+                    <Typography variant="body2" color="text.secondary" sx={{ mt: 'auto', fontSize: '0.9rem', display: 'block' }}>
                         {new Date(video.date).toLocaleDateString()}
                     </Typography>
                 </CardContent>

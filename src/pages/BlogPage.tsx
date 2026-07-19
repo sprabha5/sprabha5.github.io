@@ -58,13 +58,13 @@ const BlogPage: React.FC = () => {
                         >
                             <Typography
                                 variant="h4"
-                                fontWeight={800}
                                 sx={{
                                     mb: 2,
+                                    fontWeight: 800,
                                     fontSize: { xs: '1.5rem', sm: '2rem' },
                                     overflowWrap: 'anywhere',
                                     wordBreak: 'break-word',
-                                    letterSpacing: '-0.02em',
+                                    letterSpacing: 0,
                                     lineHeight: 1.25,
                                 }}
                             >
@@ -74,12 +74,11 @@ const BlogPage: React.FC = () => {
                             <Stack
                                 direction="row"
                                 spacing={2}
-                                alignItems="center"
-                                sx={{ mb: 2.5, flexWrap: 'wrap', opacity: 0.8 }}
+                                sx={{ mb: 2.5, flexWrap: 'wrap', opacity: 0.8, alignItems: 'center' }}
                                 useFlexGap
                             >
                                 {metadata.date && (
-                                    <Typography variant="body2" color="text.secondary" fontWeight={500}>
+                                    <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
                                         {new Date(metadata.date).toLocaleDateString(undefined, {
                                             year: 'numeric',
                                             month: 'long',
@@ -88,7 +87,7 @@ const BlogPage: React.FC = () => {
                                     </Typography>
                                 )}
                                 {readingTime > 0 && (
-                                    <Stack direction="row" alignItems="center" spacing={0.5}>
+                                    <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
                                         <AccessTimeIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
                                         <Typography variant="body2" color="text.secondary">
                                             {readingTime} min read

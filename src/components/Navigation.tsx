@@ -26,12 +26,20 @@ import NightSkyBackground from './NightSkyBackground';
 
 const drawerWidth = 80; // Navigation Rail width
 const contentMaxWidth = 1200;
+const youtubeChannelUrl = 'https://www.youtube.com/@DLLwithshashi';
 
-const navItems = [
+type NavItem = {
+    label: string;
+    icon: React.ReactNode;
+    path?: string;
+    externalUrl?: string;
+};
+
+const navItems: NavItem[] = [
     { label: 'Home', path: '/', icon: <PersonIcon /> },
     { label: 'Notes', path: '/notes', icon: <NoteIcon /> },
     { label: 'Blog', path: '/blog', icon: <ArticleIcon /> },
-    { label: 'YouTube', path: '/youtube', icon: <PlayCircleIcon /> },
+    { label: 'DLLwithshashi', externalUrl: youtubeChannelUrl, icon: <PlayCircleIcon /> },
 ];
 
 interface NavigationProps {
@@ -49,7 +57,11 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
         return normalized === '' ? '/' : normalized;
     };
 
-    const isPathSelected = (targetPath: string) => {
+    const isPathSelected = (targetPath?: string) => {
+        if (!targetPath) {
+            return false;
+        }
+
         const current = normalizePath(location.pathname);
         const target = normalizePath(targetPath);
 
@@ -60,8 +72,15 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
         return current === target || current.startsWith(`${target}/`);
     };
 
-    const handleNavigation = (path: string) => {
-        navigate(path);
+    const handleNavigation = (item: NavItem) => {
+        if (item.externalUrl) {
+            window.open(item.externalUrl, '_blank', 'noopener,noreferrer');
+            return;
+        }
+
+        if (item.path) {
+            navigate(item.path);
+        }
     };
 
     const activeTab = navItems.findIndex((item) => isPathSelected(item.path));
@@ -87,7 +106,7 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
             >
                 <Toolbar disableGutters sx={{ px: { xs: 3, sm: 6, md: 8 } }}>
                     <Box sx={{ width: '100%', maxWidth: contentMaxWidth, mx: 'auto', display: 'flex', alignItems: 'center' }}>
-                        <Typography variant="h6" noWrap component="div" fontWeight={600} sx={{ minWidth: 0, flexGrow: 1 }}>
+                        <Typography variant="h6" noWrap component="div" sx={{ minWidth: 0, flexGrow: 1, fontWeight: 600 }}>
                             {currentLabel}
                         </Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
@@ -144,7 +163,7 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
                             return (
                                 <ListItem key={item.label} disablePadding sx={{ mb: 1 }}>
                                     <ListItemButton
-                                        onClick={() => handleNavigation(item.path)}
+                                        onClick={() => handleNavigation(item)}
                                         selected={selected}
                                         sx={{
                                             display: 'flex',
@@ -212,7 +231,7 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
                         showLabels
                         value={resolvedActiveTab}
                         onChange={(_, newValue) => {
-                            handleNavigation(navItems[newValue].path);
+                            handleNavigation(navItems[newValue]);
                         }}
                         sx={{
                             bgcolor: 'rgba(10, 14, 26, 0.8)',

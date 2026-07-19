@@ -81,7 +81,7 @@ const YouTubePage: React.FC = () => {
                         </Box>
                     </Paper>
 
-                    <Typography variant="h5" fontWeight={700} sx={{ mb: 1.5, fontSize: { xs: '1.25rem', sm: '1.5rem' } }}>
+                    <Typography variant="h5" sx={{ mb: 1.5, fontWeight: 700, fontSize: { xs: '1.25rem', sm: '1.5rem' } }}>
                         {video.title}
                     </Typography>
 
